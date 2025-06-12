@@ -10,8 +10,8 @@ def generate_time_png(filename="current_time.png"):
     current_time = datetime.datetime.now().strftime("%H:%M")
 
     # Image dimensions (adjust as needed)
-    img_width = 600
-    img_height = 200
+    img_width = 1200
+    img_height = 400
 
     # Create a black image
     img = Image.new('RGBA', (img_width, img_height), color = (255, 0, 0, 0))
