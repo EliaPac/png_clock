@@ -19,7 +19,7 @@ def generate_time_png(filename="current_time.png"):
 
     # Try to load a font (you might need to specify a path to a font file)
     try:
-        font_size = 62
+        font_size = 120
         # Common font paths:
         # Windows: C:/Windows/Fonts/arial.ttf
         # macOS: /Library/Fonts/Arial.ttf
