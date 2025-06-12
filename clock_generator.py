@@ -25,7 +25,7 @@ def generate_time_png(filename="current_time.png"):
         # macOS: /Library/Fonts/Arial.ttf
         # Linux: /usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf (or similar)
         # If you don't have a specific font, Pillow will use a default
-        font = ImageFont.truetype("Montserrat-ExtraBold.ttf", font_size) # Replace "arial.ttf" with a font available on your system if needed
+        font = ImageFont.truetype("./Montserrat-ExtraBold.ttf", font_size) # Replace "arial.ttf" with a font available on your system if needed
     except IOError:
         font = ImageFont.load_default()
         # print("Could not load specified font, using default.")
