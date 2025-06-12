@@ -1,0 +1,52 @@
+name: Clock generator schedule
+
+on:
+  schedule:
+    # Runs every 5 minutes (UTC time)
+    # GitHub Actions schedules run in UTC.
+    # Adjust if you need it to align with a specific local time.
+    - cron: "*/5 * * * *"
+
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+jobs:
+  build:
+    runs_on: ubuntu-latest
+    permissions:
+      contents: write # Grant write permission to the GITHUB_TOKEN for pushing changes
+
+    steps:
+    - name: Set Timezone
+      # This action sets the timezone for the runner environment.
+      # Useful if your Python script relies on the system's timezone for accurate time representation.
+      uses: svenstaro/set-timezone@v1.0
+      with:
+        timezoneLinux: "Europe/Rome"
+
+    - name: Checkout repository content
+      uses: actions/checkout@v2 # Checkout the repository content to github runner.
+
+    - name: Setup Python Version
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install Python dependencies
+      # Assuming requirements.txt contains pypng and Pillow, or just install directly.
+      run: pip install -r requirements.txt # Or: pip install pypng Pillow
+
+    - name: Execute Python script
+      run: python clock_generator.py
+
+    - name: Configure Git and Commit files
+      run: |
+        git config --local user.name "github-actions[bot]" # Use the standard bot user
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git add --all
+        git commit -am "CH ACTION Headlines $(date)"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master # Use a dedicated action for pushing
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main # Specify the branch to push to
