@@ -1,0 +1,19 @@
+name: Clock generator schedule
+
+on:
+  schedule:
+  - cron: "* * * * *"
+
+workflow_dispatch:
+
+jobs:
+  build:
+    runs_on: ubuntu-latest
+
+    steps:
+    - name: Set Timezone
+      uses: s zenius/set-timezone@vl.O
+      with:
+        timezoneLinux: "Europe/Rome"
+    - name: Checkout repository content
+      uses: actions/checkout@v2 # Checkout the repository content to github runner.
