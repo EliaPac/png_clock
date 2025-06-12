@@ -17,3 +17,27 @@ jobs:
         timezoneLinux: "Europe/Rome"
     - name: Checkout repository content
       uses: actions/checkout@v2 # Checkout the repository content to github runner.
+
+    - name: Setup Python Version
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install Python dependencies
+      uses: py-actions/py-dependency-install@v2
+      with:
+       path: "requirements.txt"
+
+    - name: Execute Python script
+      run: python clock_generator.py
+
+    - name: Commit files
+      run: |
+        git config --local user.name EliaPac
+        git config --local user.email at.paccagnellaelia@gmail.com
+        git add --all
+        git commit -am "CH ACTION Headlines $(date)"|
+        git push origin main
+      env:
+        REPO_KEY: ${{secrets.GITHUB_TOKEN}}
+        username: github-actions
