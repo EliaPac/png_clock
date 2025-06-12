@@ -17,11 +17,19 @@ jobs:
 
     steps:
     - name: Set Timezone
-      # This action sets the timezone for the runner environment.
-      # Useful if your Python script relies on the system's timezone for accurate time representation.
-      uses: svenstaro/set-timezone@v1.0
+      # You may pin to the exact commit or the version.
+      # uses: szenius/set-timezone@1f9716b0f7120e344f0c62bb7b1ee98819aefd42
+      uses: szenius/set-timezone@v2.0
       with:
-        timezoneLinux: "Europe/Rome"
+        # Desired timezone for Linux
+        timezoneLinux: "Europe/Rome" # optional, default is UTC
+          
+    # - name: Set Timezone
+    #   # This action sets the timezone for the runner environment.
+    #   # Useful if your Python script relies on the system's timezone for accurate time representation.
+    #   uses: svenstaro/set-timezone@v1.0
+    #   with:
+    #     timezoneLinux: "Europe/Rome"
 
     - name: Checkout repository content
       uses: actions/checkout@v2 # Checkout the repository content to github runner.
